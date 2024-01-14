@@ -1,3 +1,9 @@
 from django.contrib import admin
+from app.models import *
+admin.site.register(Tovar)
 
-# Register your models here.
+
+@admin.register(Cart)
+class CarAdmin(admin.ModelAdmin):
+    list_display = ('user', 'tovar', 'count', 'summa')
+

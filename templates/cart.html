@@ -1,10 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+{% extends 'index.html' %}
+{% load static %}
+
+{% block head%}
     <title>КОРЗИНА</title>
-</head>
-<body>
-     <h2>Корзина</h2>
-</body>
+     <link rel="stylesheet" href="{% static '1.css' %}">
+{% endblock %}
+
+{% block content %}
+     <h2>КОРЗИНА</h2>
+    <table>
+        {% for one in tovar %}
+            <tr>
+                <td>{{ one.tovar.name }}</td>
+                <td>
+                    <a href="">
+                        <button> - </button>
+                    </a>
+                </td>
+                 <td>
+                    <a href="">
+                        <button> + </button>
+                    </a>
+                </td>
+                <td>{{ one.count }} шт</td>
+                <td>{{ one.summa }} p</td>
+                <td>
+                    <a href="{% url 'delete' one.id %}">
+                        <button> УДАЛИТЬ </button>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <h2>ИТОГО: {{ total }}</h2>
+{% endblock %}
 </html>

@@ -1,10 +1,32 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
-<head>
+{% block head%}
     <meta charset="UTF-8">
     <title>МАГАЗИН</title>
-</head>
-<body>
-     <h2>Привет</h2>
-</body>
+    <link rel="stylesheet" href="{% static '1.css' %}">
+{% endblock %}
+
+{% block header %}
+ <header>
+     <a href="{% url 'home' %}"> Главная </a>
+     <a href="{% url 'tocart' %}"> Корзина </a>
+ </header>
+{% endblock header %}
+{% block content %}
+    <h2>МАГАЗИН</h2>
+
+    <main>
+        {% for one in tovar %}
+            <div class="card">
+                <img src="{% static one.image %}" alt="">
+                <p>{{ one.name }}</p>
+                <p>{{ one.price }}</p>
+                <a href="{% url 'buy' one.id %}">
+                    <button>КУПИТЬ</button>
+                </a>
+            </div>
+        {% endfor %}
+    </main>
+{% endblock %}
 </html>
