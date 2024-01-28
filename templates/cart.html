@@ -4,6 +4,7 @@
 {% block head%}
     <title>КОРЗИНА</title>
      <link rel="stylesheet" href="{% static '1.css' %}">
+    <script src="{% static '1.js' %}" defer></script>
 {% endblock %}
 
 {% block content %}
@@ -12,26 +13,35 @@
         {% for one in tovar %}
             <tr>
                 <td>{{ one.tovar.name }}</td>
-                <td>
-                    <a href="">
-                        <button> - </button>
+                <td  class="td">
+                    <a href="{% url 'count' -1 one.id %}">
+                        <button class="knopka"> - </button>
                     </a>
                 </td>
-                 <td>
-                    <a href="">
-                        <button> + </button>
+                 <td class="td">
+                    <a href="{% url 'count' 1 one.id %}">
+                        <button class="knopka"> + </button>
                     </a>
                 </td>
                 <td>{{ one.count }} шт</td>
                 <td>{{ one.summa }} p</td>
-                <td>
+                <td  class="td">
                     <a href="{% url 'delete' one.id %}">
-                        <button> УДАЛИТЬ </button>
+                        <button class="knopka"> УДАЛИТЬ </button>
                     </a>
                 </td>
             </tr>
         {% endfor %}
     </table>
     <h2>ИТОГО: {{ total }}</h2>
+    <hr>
+    <button id="formbut">Оформить</button>
+    <div id="formdiv" hidden>
+        <form action="" method="post" novalidate>
+            {% csrf_token %}
+            {{ formaorder }}
+{#            {{  formaorder.errors}}#}
+            <input type="submit" value="Отправить">
+        </form>
+    </div>
 {% endblock %}
-</html>
