@@ -95,6 +95,7 @@ def cartCount(req, num, id):
 
 
 import telebot
+# import requests
 
 
 def telegram(neworder):
